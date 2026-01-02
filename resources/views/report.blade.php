@@ -10,11 +10,11 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Periode Laporan</label>
                     <div class="flex space-x-2">
-                        <button class="period-btn px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50"
+                        <button class="period-btn px-4 py-2 border rounded-lg bg-primary text-white"
                             data-period="today">Hari Ini</button>
                         <button class="period-btn px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50"
                             data-period="week">Minggu Ini</button>
-                        <button class="period-btn px-4 py-2 border rounded-lg bg-primary text-white"
+                        <button class="period-btn px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50"
                             data-period="month">Bulan Ini</button>
                         <button class="period-btn px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50"
                             data-period="year">Tahun Ini</button>
@@ -700,10 +700,10 @@
             const hasDateParams = urlParams.has('start_date') || urlParams.has('end_date');
 
             if (!hasDateParams) {
-                // Default: bulan ini
-                document.querySelector('[data-period="month"]').classList.add('bg-primary', 'text-white');
-                document.querySelector('[data-period="month"]').classList.remove('text-gray-700', 'hover:bg-gray-50');
+                document.querySelector('[data-period="today"]').classList.add('bg-primary', 'text-white');
+                document.querySelector('[data-period="today"]').classList.remove('text-gray-700', 'hover:bg-gray-50');
             }
+
 
             console.log('Charts initialized successfully');
         });

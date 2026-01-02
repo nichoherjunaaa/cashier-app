@@ -233,41 +233,23 @@ class ReportController extends Controller
      * Get payment method data
      */
     private function getPaymentMethodData($start, $end)
-    {
-        try {
-            $payments = Transaction::select('payment_method', DB::raw('COUNT(*) as count'))
-                ->whereBetween('created_at', [$start, $end])
-                ->whereNotNull('payment_method')
-                ->groupBy('payment_method')
-                ->get();
+{
+    $payments = Transaction::select(
+            DB::raw('LOWER(payment_method) as method'),
+            DB::raw('COUNT(*) as count')
+        )
+        ->whereBetween('created_at', [$start, $end])
+        ->whereNotNull('payment_method')
+        ->where('payment_method', '!=', '')
+        ->groupBy('method')
+        ->get();
 
-            $labels = [];
-            $data = [];
+    return [
+        'labels' => $payments->map(fn($p) => $this->getPaymentMethodName($p->method)),
+        'data' => $payments->pluck('count'),
+    ];
+}
 
-            foreach ($payments as $payment) {
-                $labels[] = $this->getPaymentMethodName($payment->payment_method);
-                $data[] = $payment->count;
-            }
-
-            // Jika tidak ada data
-            if (empty($labels)) {
-                $labels = ['Tunai', 'Debit', 'QRIS'];
-                $data = [5, 3, 2];
-            }
-
-            return [
-                'labels' => $labels,
-                'data' => $data
-            ];
-
-        } catch (\Exception $e) {
-            \Log::error('Error getting payment methods: ' . $e->getMessage());
-            return [
-                'labels' => ['Tunai', 'Debit', 'QRIS'],
-                'data' => [5, 3, 2]
-            ];
-        }
-    }
 
     /**
      * Get best selling items - DIPERBAIKI

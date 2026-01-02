@@ -46,43 +46,43 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200" id="productTableBody">
                                 @foreach ($items as $item)
-                                                        <tr class="table-row-hover cursor-pointer hover:bg-gray-50" data-id="{{ $item->id }}"
-                                                            data-name="{{ $item->name }}" data-price="{{ $item->price }}"
-                                                            data-stock="{{ $item->stock }}" data-code="{{ $item->item_code }}">
-                                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                                <div class="flex items-center">
-                                                                    <div>
-                                                                        <div class="text-sm font-medium text-gray-900">{{ $item->name }}</div>
-                                                                        <div class="text-sm text-gray-500">Kategori: {{ $item->category->name }}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                                <div class="text-sm text-gray-900">{{ $item->item_code }}</div>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                                <span
-                                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                                                                                        {{ $item->stock > 10 ? 'bg-green-100 text-green-800' :
-                                    ($item->stock > 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
-                                                                    {{ $item->stock }}
-                                                                </span>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                                <span class="font-bold text-primary-dark item-price"
-                                                                    data-price="{{ $item->price }}">
-                                                                    Rp {{ number_format($item->price, 0, ',', '.') }}
-                                                                </span>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                                <button
-                                                                    class="add-to-cart-btn bg-primary hover:bg-primary-dark text-white py-2 px-4 rounded-md text-sm transition-colors duration-200 shadow-sm"
-                                                                    data-item-id="{{ $item->id }}">
-                                                                    <i class="fas fa-plus mr-1"></i> Tambah
-                                                                </button>
-                                                            </td>
-                                                        </tr>
+                                    <tr class="table-row-hover cursor-pointer hover:bg-gray-50" data-id="{{ $item->id }}"
+                                        data-name="{{ $item->name }}" data-price="{{ $item->price }}"
+                                        data-stock="{{ $item->stock }}" data-code="{{ $item->item_code }}">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div>
+                                                    <div class="text-sm font-medium text-gray-900">{{ $item->name }}</div>
+                                                    <div class="text-sm text-gray-500">Kategori: {{ $item->category->name }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">{{ $item->item_code }}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span
+                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                                    {{ $item->stock > 10 ? 'bg-green-100 text-green-800' :
+                                                        ($item->stock > 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
+                                                {{ $item->stock }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            <span class="font-bold text-primary-dark item-price"
+                                                data-price="{{ $item->price }}">
+                                                Rp {{ number_format($item->price, 0, ',', '.') }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <button
+                                                class="add-to-cart-btn bg-primary hover:bg-primary-dark text-white py-2 px-4 rounded-md text-sm transition-colors duration-200 shadow-sm"
+                                                data-item-id="{{ $item->id }}">
+                                                <i class="fas fa-plus mr-1"></i> Tambah
+                                            </button>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -172,7 +172,7 @@
                             class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg flex items-center justify-center transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled>
                             <i class="fas fa-save mr-2"></i> Simpan Transaksi
-                    </button>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -190,6 +190,53 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Konfirmasi -->
+    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 transform transition-all">
+            <div class="p-6">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-question text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+                <h3 id="modalTitle" class="text-xl font-bold text-center text-gray-900 mb-2"></h3>
+                <p id="modalMessage" class="text-gray-600 text-center mb-6"></p>
+                <div class="flex space-x-3">
+                    <button id="modalCancelBtn"
+                        class="flex-1 border border-gray-300 text-gray-700 font-medium py-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                        Batal
+                    </button>
+                    <button id="modalConfirmBtn"
+                        class="flex-1 bg-primary text-white font-medium py-3 rounded-lg hover:bg-primary-dark transition-colors duration-200">
+                        Ya, Konfirmasi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Informasi -->
+    <div id="infoModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 transform transition-all">
+            <div class="p-6">
+                <div class="flex items-center justify-center mb-4">
+                    <div id="infoModalIcon" class="w-12 h-12 rounded-full flex items-center justify-center">
+                        <i class="fas fa-info text-xl"></i>
+                    </div>
+                </div>
+                <h3 id="infoModalTitle" class="text-xl font-bold text-center text-gray-900 mb-2"></h3>
+                <p id="infoModalMessage" class="text-gray-600 text-center mb-6"></p>
+                <div class="flex justify-center">
+                    <button id="infoModalOkBtn"
+                        class="bg-primary text-white font-medium py-3 px-8 rounded-lg hover:bg-primary-dark transition-colors duration-200">
+                        Oke
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -197,6 +244,8 @@
             let cart = [];
             let selectedPaymentMethod = 'tunai';
             let totalAmount = 0;
+            let pendingAction = null;
+            let pendingIndex = null;
 
             // Format Rupiah
             function formatRupiah(amount) {
@@ -222,6 +271,55 @@
                 }, 3000);
             }
 
+            // Show confirmation modal
+            function showConfirmationModal(title, message, confirmCallback) {
+                $('#modalTitle').text(title);
+                $('#modalMessage').text(message);
+                $('#confirmationModal').removeClass('hidden');
+
+                // Set up confirm button
+                $('#modalConfirmBtn').off('click').on('click', function () {
+                    $('#confirmationModal').addClass('hidden');
+                    if (confirmCallback) confirmCallback();
+                });
+
+                // Set up cancel button
+                $('#modalCancelBtn').off('click').on('click', function () {
+                    $('#confirmationModal').addClass('hidden');
+                });
+            }
+
+            // Show info modal
+            function showInfoModal(title, message, type = 'info') {
+                const iconContainer = $('#infoModalIcon');
+                const icon = iconContainer.find('i');
+                
+                // Set icon based on type
+                icon.removeClass();
+                if (type === 'error') {
+                    iconContainer.addClass('bg-red-100');
+                    icon.addClass('fas fa-exclamation-circle text-red-600 text-xl');
+                } else if (type === 'warning') {
+                    iconContainer.addClass('bg-yellow-100');
+                    icon.addClass('fas fa-exclamation-triangle text-yellow-600 text-xl');
+                } else if (type === 'success') {
+                    iconContainer.addClass('bg-green-100');
+                    icon.addClass('fas fa-check-circle text-green-600 text-xl');
+                } else {
+                    iconContainer.addClass('bg-blue-100');
+                    icon.addClass('fas fa-info-circle text-blue-600 text-xl');
+                }
+
+                $('#infoModalTitle').text(title);
+                $('#infoModalMessage').text(message);
+                $('#infoModal').removeClass('hidden');
+
+                // Set up OK button
+                $('#infoModalOkBtn').off('click').on('click', function () {
+                    $('#infoModal').addClass('hidden');
+                });
+            }
+
             // Add to cart function
             $(document).on('click', '.add-to-cart-btn', function () {
                 const row = $(this).closest('tr');
@@ -233,7 +331,7 @@
 
                 // Validate stock
                 if (itemStock <= 0) {
-                    alert('Stok produk ini habis!');
+                    showInfoModal('Stok Habis', 'Stok produk ini habis!', 'error');
                     return;
                 }
 
@@ -251,7 +349,7 @@
                     if (cart[existingItemIndex].quantity < itemStock) {
                         cart[existingItemIndex].quantity++;
                     } else {
-                        alert('Stok tidak mencukupi!');
+                        showInfoModal('Stok Tidak Mencukupi', 'Stok tidak mencukupi!', 'warning');
                         return;
                     }
                 } else {
@@ -303,42 +401,41 @@
 
                     cartItemsHtml += `
                         <div class="cart-item bg-gray-50 rounded-lg p-3 mb-2 fade-in-up text-xs">
-        <div class="flex justify-between items-center">
-            <div class="flex-1">
-                <div class="font-medium text-gray-900 text-sm">${item.name}</div>
-                <div class="text-[10px] text-gray-500">Kode: ${item.code}</div>
-                <div class="text-xs font-bold text-primary-dark mt-1">
-                        ${formatRupiah(itemTotal)}
-                </div>
-            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex-1">
+                                    <div class="font-medium text-gray-900 text-sm">${item.name}</div>
+                                    <div class="text-[10px] text-gray-500">Kode: ${item.code}</div>
+                                    <div class="text-xs font-bold text-primary-dark mt-1">
+                                        ${formatRupiah(itemTotal)}
+                                    </div>
+                                </div>
 
-            <div class="flex items-center space-x-3">
-                <div class="flex items-center space-x-2 bg-white rounded-full px-2 py-0.5 border">
-                    <button class="decrease-qty text-gray-600 hover:text-primary w-5 h-5 flex items-center justify-center"
-                            data-index="${index}">
-                        <i class="fas fa-minus text-[10px]"></i>
-                    </button>
+                                <div class="flex items-center space-x-3">
+                                    <div class="flex items-center space-x-2 bg-white rounded-full px-2 py-0.5 border">
+                                        <button class="decrease-qty text-gray-600 hover:text-primary w-5 h-5 flex items-center justify-center"
+                                                data-index="${index}">
+                                            <i class="fas fa-minus text-[10px]"></i>
+                                        </button>
 
-                    <span class="font-bold min-w-[24px] text-center text-xs">
-                        ${item.quantity}
-                    </span>
+                                        <span class="font-bold min-w-[24px] text-center text-xs">
+                                            ${item.quantity}
+                                        </span>
 
-                    <button class="increase-qty text-gray-600 hover:text-primary w-5 h-5 flex items-center justify-center"
-                            data-index="${index}">
-                        <i class="fas fa-plus text-[10px]"></i>
-                    </button>
-                </div>
+                                        <button class="increase-qty text-gray-600 hover:text-primary w-5 h-5 flex items-center justify-center"
+                                                data-index="${index}">
+                                            <i class="fas fa-plus text-[10px]"></i>
+                                        </button>
+                                    </div>
 
-                <div class="text-right">
-                    <button class="remove-item text-red-500 hover:text-red-700 text-[10px] mt-0.5"
-                            data-index="${index}">
-                        <i class="fas fa-trash mr-1"></i> Hapus
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+                                    <div class="text-right">
+                                        <button class="remove-item text-red-500 hover:text-red-700 text-[10px] mt-0.5"
+                                                data-index="${index}">
+                                            <i class="fas fa-trash mr-1"></i> Hapus
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     `;
                 });
 
@@ -369,16 +466,23 @@
                     cart[index].quantity++;
                     updateCartDisplay();
                 } else {
-                    alert('Stok tidak mencukupi!');
+                    showInfoModal('Stok Tidak Mencukupi', 'Stok tidak mencukupi!', 'warning');
                 }
             });
 
             $(document).on('click', '.remove-item', function () {
                 const index = parseInt($(this).data('index'));
-                if (confirm('Hapus ' + cart[index].name + ' dari keranjang?')) {
-                    cart.splice(index, 1);
-                    updateCartDisplay();
-                }
+                const itemName = cart[index].name;
+                
+                showConfirmationModal(
+                    'Hapus Item',
+                    `Hapus "${itemName}" dari keranjang?`,
+                    function () {
+                        cart.splice(index, 1);
+                        updateCartDisplay();
+                        showNotification(itemName + ' berhasil dihapus dari keranjang');
+                    }
+                );
             });
 
             // Payment method selection
@@ -454,7 +558,7 @@
             // Save transaction
             $('#saveTransactionBtn').on('click', function () {
                 if (cart.length === 0) {
-                    alert('Keranjang belanja kosong!');
+                    showInfoModal('Keranjang Kosong', 'Keranjang belanja kosong!', 'warning');
                     return;
                 }
 
@@ -462,79 +566,70 @@
 
                 // Validate cash payment
                 if (selectedPaymentMethod === 'tunai' && paymentAmount < totalAmount) {
-                    alert('Jumlah pembayaran tunai kurang!');
+                    showInfoModal('Pembayaran Kurang', 'Jumlah pembayaran tunai kurang!', 'error');
                     $('#paymentAmount').focus();
                     return;
                 }
 
                 // Validate non-cash payment
                 if (selectedPaymentMethod !== 'tunai' && paymentAmount <= 0) {
-                    alert('Masukkan jumlah pembayaran!');
+                    showInfoModal('Input Pembayaran', 'Masukkan jumlah pembayaran!', 'warning');
                     $('#paymentAmount').focus();
                     return;
                 }
 
-                // Prepare transaction data
-                const transactionData = {
-                    _token: '{{ csrf_token() }}',
-                    items: cart.map(item => ({
-                        item_id: item.id,
-                        quantity: item.quantity,
-                        price: item.price
-                    })),
-                    total_amount: totalAmount,
-                    payment_method: selectedPaymentMethod,
-                    payment_amount: paymentAmount,
-                    change_amount: selectedPaymentMethod === 'tunai' ? Math.max(0, paymentAmount - totalAmount) : 0
-                };
+                // Show confirmation before saving
+                showConfirmationModal(
+                    'Konfirmasi Transaksi',
+                    `Simpan transaksi dengan total ${formatRupiah(totalAmount)}?`,
+                    function () {
+                        // Prepare transaction data
+                        const transactionData = {
+                            _token: '{{ csrf_token() }}',
+                            items: cart.map(item => ({
+                                item_id: item.id,
+                                quantity: item.quantity,
+                                price: item.price
+                            })),
+                            total_amount: totalAmount,
+                            payment_method: selectedPaymentMethod,
+                            payment_amount: paymentAmount,
+                            change_amount: selectedPaymentMethod === 'tunai' ? Math.max(0, paymentAmount - totalAmount) : 0
+                        };
 
-                console.log('Saving transaction:', transactionData);
+                        console.log('Saving transaction:', transactionData);
 
-                // Show loading state
-                const $saveButton = $(this);
-                const originalHtml = $saveButton.html();
-                $saveButton.html('<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...')
-                    .prop('disabled', true);
+                        // Show loading state
+                        const $saveButton = $('#saveTransactionBtn');
+                        const originalHtml = $saveButton.html();
+                        $saveButton.html('<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...')
+                            .prop('disabled', true);
 
-                // Simulate API call (replace with actual AJAX call)
-                $.ajax({
-    url: "{{ route('transactions.store') }}",
-    method: "POST",
-    data: transactionData,
-    success: function (response) {
-        $saveButton.html(originalHtml).prop('disabled', false);
+                        // Simulate API call (replace with actual AJAX call)
+                        $.ajax({
+                            url: "{{ route('transactions.store') }}",
+                            method: "POST",
+                            data: transactionData,
+                            success: function (response) {
+                                $saveButton.html(originalHtml).prop('disabled', false);
 
-        showNotification(response.message);
+                                showNotification(response.message);
 
-        cart = [];
-        updateCartDisplay();
-        $('#paymentAmount').val('');
-        $('#changeContainer').addClass('hidden');
-    },
-    error: function (xhr) {
-        $saveButton.html(originalHtml).prop('disabled', false);
+                                cart = [];
+                                updateCartDisplay();
+                                $('#paymentAmount').val('');
+                                $('#changeContainer').addClass('hidden');
+                            },
+                            error: function (xhr) {
+                                $saveButton.html(originalHtml).prop('disabled', false);
 
-        alert(xhr.responseJSON?.message || 'Terjadi kesalahan');
-        console.error(xhr.responseJSON);
-    }
-});
-
-            });
-
-            // Cancel transaction
-            $('#cancelTransactionBtn').on('click', function () {
-                if (cart.length === 0) {
-                    alert('Tidak ada transaksi untuk dibatalkan');
-                    return;
-                }
-
-                if (confirm('Batalkan transaksi ini? Semua item di keranjang akan dihapus.')) {
-                    cart = [];
-                    updateCartDisplay();
-                    $('#paymentAmount').val('');
-                    $('#changeContainer').addClass('hidden');
-                    showNotification('Transaksi dibatalkan');
-                }
+                                const errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menyimpan transaksi';
+                                showInfoModal('Kesalahan', errorMessage, 'error');
+                                console.error(xhr.responseJSON);
+                            }
+                        });
+                    }
+                );
             });
 
             // Update date time
@@ -565,9 +660,24 @@
                     $('#saveTransactionBtn').click();
                 }
 
-                // Esc to cancel
+                // Esc to close modals
                 if (e.key === 'Escape') {
-                    $('#cancelTransactionBtn').click();
+                    if (!$('#confirmationModal').hasClass('hidden')) {
+                        $('#confirmationModal').addClass('hidden');
+                    }
+                    if (!$('#infoModal').hasClass('hidden')) {
+                        $('#infoModal').addClass('hidden');
+                    }
+                }
+            });
+
+            // Close modal when clicking outside
+            $(document).on('click', function (e) {
+                if ($(e.target).is('#confirmationModal')) {
+                    $('#confirmationModal').addClass('hidden');
+                }
+                if ($(e.target).is('#infoModal')) {
+                    $('#infoModal').addClass('hidden');
                 }
             });
         });
@@ -628,6 +738,29 @@
 
         .add-to-cart-btn:active {
             transform: translateY(0);
+        }
+
+        /* Modal animations */
+        #confirmationModal,
+        #infoModal {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #confirmationModal:not(.hidden),
+        #infoModal:not(.hidden) {
+            opacity: 1;
+        }
+
+        #confirmationModal > div,
+        #infoModal > div {
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        #confirmationModal:not(.hidden) > div,
+        #infoModal:not(.hidden) > div {
+            transform: scale(1);
         }
     </style>
 @endpush
