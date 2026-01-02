@@ -686,7 +686,6 @@
 
 @push('styles')
     <style>
-        /* Custom Scrollbar */
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
@@ -705,7 +704,6 @@
             background: #555;
         }
 
-        /* Fixed header untuk tabel */
         table thead {
             position: sticky;
             top: 0;
@@ -713,7 +711,6 @@
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
-        /* Animation untuk cart items */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -730,7 +727,6 @@
             animation: fadeInUp 0.3s ease-out;
         }
 
-        /* Button hover effects */
         .add-to-cart-btn:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -740,7 +736,6 @@
             transform: translateY(0);
         }
 
-        /* Modal animations */
         #confirmationModal,
         #infoModal {
             opacity: 0;

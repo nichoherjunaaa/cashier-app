@@ -29,15 +29,14 @@ class HomeController extends Controller
         // Persentase perubahan
         $percentage_increase_income = $income_yesterday > 0
             ? (($income_today - $income_yesterday) / $income_yesterday) * 100
-            : 0;
+            : 100;
 
         $percentage_increase_transactions = $transactions_yesterday > 0
             ? (($transactions_today - $transactions_yesterday) / $transactions_yesterday) * 100
-            : 0;
-
+            : 100;
         $percentage_increase_items = $items_sold_yesterday > 0
             ? (($items_sold_today - $items_sold_yesterday) / $items_sold_yesterday) * 100
-            : 0;
+            : 100;
 
         // Stok menipis
         $item_low_stock = Item::where('stock', '>', 0)
