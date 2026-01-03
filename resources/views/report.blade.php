@@ -317,16 +317,12 @@
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Pastikan Chart.js sudah dimuat
-        console.log('Chart.js loaded:', typeof Chart !== 'undefined');
-
-        // Chart instances
+        // console.log('Chart.js loaded:', typeof Chart !== 'undefined');
         let revenueChart = null;
         let categoryChart = null;
         let paymentChart = null;
         let currentChartPeriod = 'daily';
 
-        // Data untuk grafik dari controller
         const revenueData = {
             daily: {
                 labels: @json($dailyRevenue['labels'] ?? []),
@@ -342,24 +338,20 @@
             }
         };
 
-        // Data untuk grafik kategori dari controller
         const categoryData = {
             labels: @json($categorySales['labels'] ?? []),
             data: @json($categorySales['data'] ?? [])
         };
 
-        // Data untuk grafik metode pembayaran dari controller
         const paymentData = {
             labels: @json($paymentMethods['labels'] ?? []),
             data: @json($paymentMethods['data'] ?? [])
         };
 
-        // Fungsi untuk format Rupiah
         function formatRupiah(amount) {
             return 'Rp ' + amount.toLocaleString('id-ID');
         }
 
-        // Fungsi untuk inisialisasi grafik pendapatan
         function initRevenueChart(period = 'daily') {
             const canvas = document.getElementById('revenueChart');
             if (!canvas) {
@@ -375,7 +367,6 @@
 
             const data = revenueData[period];
 
-            // Validasi data
             if (!data || data.data.length === 0) {
                 console.warn('Tidak ada data untuk grafik pendapatan', period);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -442,7 +433,6 @@
             });
         }
 
-        // Fungsi untuk inisialisasi grafik kategori
         function initCategoryChart() {
             const canvas = document.getElementById('categoryChart');
             if (!canvas) {
@@ -456,7 +446,6 @@
                 categoryChart.destroy();
             }
 
-            // Validasi data
             if (!categoryData.data || categoryData.data.length === 0) {
                 console.warn('Tidak ada data untuk grafik kategori');
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -474,16 +463,16 @@
                     datasets: [{
                         data: categoryData.data,
                         backgroundColor: [
-                            '#3b82f6', // Biru
-                            '#10b981', // Hijau
-                            '#f59e0b', // Kuning
-                            '#8b5cf6', // Ungu
-                            '#ef4444', // Merah
-                            '#6b7280',  // Abu-abu
-                            '#ec4899', // Pink
-                            '#14b8a6', // Teal
-                            '#f97316', // Orange
-                            '#84cc16'  // Lime
+                            '#3b82f6', 
+                            '#10b981', 
+                            '#f59e0b', 
+                            '#8b5cf6', 
+                            '#ef4444', 
+                            '#6b7280', 
+                            '#ec4899', 
+                            '#14b8a6', 
+                            '#f97316', 
+                            '#84cc16'  
                         ],
                         borderWidth: 1,
                         borderColor: '#fff'
@@ -520,7 +509,6 @@
             });
         }
 
-        // Fungsi untuk inisialisasi grafik metode pembayaran
         function initPaymentChart() {
             const canvas = document.getElementById('paymentChart');
             if (!canvas) {
@@ -553,12 +541,14 @@
                         label: 'Jumlah Transaksi',
                         data: paymentData.data,
                         backgroundColor: [
-                            '#3b82f6', // Biru
-                            '#8b5cf6', // Ungu
-                            '#10b981', // Hijau
-                            '#f59e0b', // Kuning
-                            '#ef4444', // Merah
-                            '#6b7280'  // Abu-abu
+                            '#3b82f6', 
+                            '#8b5cf6', 
+                            '#10b981', 
+                            '#f59e0b', 
+                            '#ef4444', 
+                            '#6b7280',
+                            '#ec4899',
+                            '#14b8a6',  
                         ],
                         borderWidth: 0
                     }]
@@ -591,12 +581,10 @@
             });
         }
 
-        // Fungsi untuk update grafik berdasarkan periode
         function updateChartPeriod(period) {
             currentChartPeriod = period;
             initRevenueChart(period);
 
-            // Update tombol aktif
             document.querySelectorAll('.chart-period-btn').forEach(btn => {
                 if (btn.getAttribute('data-chart') === period) {
                     btn.classList.add('bg-primary', 'text-white');
@@ -608,7 +596,6 @@
             });
         }
 
-        // Fungsi untuk update periode laporan
         function updateReportPeriod(period) {
             const today = new Date();
             const startDateInput = document.getElementById('startDate');
@@ -623,7 +610,6 @@
                     endDate = today;
                     break;
                 case 'week':
-                    // Mulai dari Senin minggu ini
                     const day = today.getDay();
                     const diff = today.getDate() - day + (day === 0 ? -6 : 1);
                     startDate = new Date(today.setDate(diff));
@@ -639,17 +625,14 @@
                     break;
             }
 
-            // Format tanggal untuk input
             startDateInput.value = startDate.toISOString().split('T')[0];
             endDateInput.value = endDate.toISOString().split('T')[0];
         }
 
-        // Fungsi untuk filter data laporan
         function filterReportData() {
             const startDate = document.getElementById('startDate').value;
             const endDate = document.getElementById('endDate').value;
 
-            // Validasi tanggal
             if (!startDate || !endDate) {
                 alert('Mohon isi kedua tanggal');
                 return;
@@ -660,31 +643,25 @@
                 return;
             }
 
-            // Redirect dengan parameter filter
             window.location.href = `{{ route('report') }}?start_date=${startDate}&end_date=${endDate}`;
         }
 
-        // Di bagian JavaScript, ubah event listener untuk tombol periode:
         document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM Loaded, initializing charts...');
 
-            // Inisialisasi semua grafik
             initRevenueChart('daily');
             initCategoryChart();
             initPaymentChart();
 
-            // Event listener untuk tombol periode laporan
             document.querySelectorAll('.period-btn').forEach(btn => {
                 btn.addEventListener('click', function () {
                     const period = this.getAttribute('data-period');
 
-                    // Update tombol aktif
                     document.querySelectorAll('.period-btn').forEach(b => {
                         b.classList.remove('bg-primary', 'text-white');
                         b.classList.add('text-gray-700', 'hover:bg-gray-50');
                     });
 
-                    // Setel tombol yang aktif
                     this.classList.add('bg-primary', 'text-white');
                     this.classList.remove('text-gray-700', 'hover:bg-gray-50');
 
@@ -692,10 +669,8 @@
                 });
             });
 
-            // Event listener untuk tombol filter
             document.getElementById('filterBtn').addEventListener('click', filterReportData);
 
-            // Set tombol aktif berdasarkan URL atau default
             const urlParams = new URLSearchParams(window.location.search);
             const hasDateParams = urlParams.has('start_date') || urlParams.has('end_date');
 
@@ -707,7 +682,6 @@
 
             console.log('Charts initialized successfully');
         });
-        // Handle window resize untuk chart responsif
         window.addEventListener('resize', function () {
             if (revenueChart) {
                 revenueChart.resize();

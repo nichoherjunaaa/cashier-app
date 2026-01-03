@@ -4,7 +4,6 @@
 @section('header_subtitle', 'Ringkasan aktivitas dan statistik sistem kasir')
 
 @section('content')
-    <!-- Ringkasan Statistik -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div class="dashboard-stat bg-white rounded-xl shadow-md p-6 border-l-4 border-primary">
             <div class="flex justify-between items-start">
@@ -110,7 +109,6 @@
             </div>
         </div>
 
-        <!-- Transaksi Terbaru -->
         <div class="bg-white rounded-xl shadow-md p-6">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-lg font-bold text-primary-dark">Transaksi Terbaru</h3>
@@ -146,9 +144,7 @@
         </div>
     </div>
 
-    <!-- Barang Populer & Aksi Cepat -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Barang Terlaris -->
         <div class="bg-white rounded-xl shadow-md p-6">
             <h3 class="text-lg font-bold text-primary-dark mb-6">Barang Terlaris Hari Ini</h3>
 

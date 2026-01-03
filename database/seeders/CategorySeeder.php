@@ -13,6 +13,10 @@ class CategorySeeder extends Seeder
             ['name' => 'Minuman', 'code_prefix' => 'MIN'],
             ['name' => 'Makanan', 'code_prefix' => 'MKN'],
             ['name' => 'Alat Tulis Kantor', 'code_prefix' => 'ATK'],
+            ['name' => 'Pakaian', 'code_prefix' => 'PKN'],
+            ['name' => 'Elektronik', 'code_prefix' => 'ELK'],
+            ['name' => 'Aksesoris', 'code_prefix' => 'AKS'],
+            ['name' => 'Lainya', 'code_prefix' => 'BRG'],
         ];
 
         foreach ($categories as $category) {
