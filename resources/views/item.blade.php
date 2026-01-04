@@ -1,5 +1,5 @@
 @extends('layouts.cashier')
-@section('title', 'Sistem Kasir - Barang')
+@section('title', 'Barang - Sistem Transaksi')
 @section('header_title', 'Manajemen Barang')
 @section('header_subtitle', 'Kelola stok dan harga barang')
 
@@ -73,17 +73,6 @@
                 </div>
             </div>
             <div class="flex space-x-4">
-                <div class="relative">
-                    <select id="filterKategori"
-                        class="border rounded-lg py-3 px-4 pr-10 appearance-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-200 bg-white">
-                        <option value="">Semua Kategori</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->name }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
-                    <i class="fas fa-chevron-down absolute right-3 top-4 text-gray-400"></i>
-                </div>
-
                 <button type="button" id="resetFilterBtn"
                     class="px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition duration-200">
                     <i class="fas fa-redo mr-2"></i> Reset

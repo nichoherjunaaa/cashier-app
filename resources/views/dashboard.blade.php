@@ -1,5 +1,5 @@
 @extends('layouts.cashier')
-@section('title', 'Beranda')
+@section('title', 'Beranda - Sistem Transaksi')
 @section('header_title', 'Dashboard Beranda')
 @section('header_subtitle', 'Ringkasan aktivitas dan statistik sistem kasir')
 
@@ -206,13 +206,13 @@
                     <p class="text-sm text-gray-600 text-center mt-2">Tambah produk baru ke inventori</p>
                 </a>
 
-                <a href="{{ route('report') }}"
+                <a href="{{ route('item') }}"
                     class="card-hover flex flex-col items-center justify-center p-6 border rounded-xl bg-yellow-50 hover:bg-yellow-100">
                     <div class="w-14 h-14 rounded-full bg-accent flex items-center justify-center mb-4">
-                        <i class="fas fa-file-invoice-dollar text-white text-xl"></i>
+                        <i class="fas fa-clipboard-list text-white text-xl"></i>
                     </div>
-                    <p class="font-medium text-primary-dark">Buat Laporan</p>
-                    <p class="text-sm text-gray-600 text-center mt-2">Buat laporan penjualan</p>
+                    <p class="font-medium text-primary-dark">Daftar Barang</p>
+                    <p class="text-sm text-gray-600 text-center mt-2">Lihat semua barang</p>
                 </a>
 
                 <a href="{{ route('report') }}"

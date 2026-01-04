@@ -1,5 +1,5 @@
 @extends('layouts.cashier')
-@section('title', 'Sistem Kasir - Laporan')
+@section('title', ' Laporan - Sistem Transaksi')
 @section('header_title', 'Laporan Transaksi')
 @section('header_subtitle', 'Ringkasan laporan transaksi dan analisis penjualan')
 
