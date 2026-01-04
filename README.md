@@ -1,103 +1,109 @@
-# 🧾 Aplikasi Manajemen Transaksi Kasir  
+# 🧾 Cashier Transaction Management Application
+
 Laravel + Vite + TailwindCSS
 
-Aplikasi Manajemen Transaksi Kasir adalah sistem berbasis web yang dibangun menggunakan framework **Laravel** untuk membantu proses pencatatan transaksi penjualan, pengelolaan stok barang, serta penyajian laporan penjualan secara periodik dalam bentuk tabel dan grafik (chart).
+The **Cashier Transaction Management Application** is a web-based system built using the **Laravel** framework to help manage sales transactions, inventory stock, and periodic sales reports presented in tables and charts.
 
-Aplikasi ini ditujukan untuk toko, UMKM, maupun pembelajaran pengembangan aplikasi berbasis Laravel.
-
----
-
-## 🚀 Fitur Utama
-
-### 📦 Manajemen Barang
-- Tambah barang
-- Lihat daftar barang
-- Update dan monitoring stok barang
-
-### 💰 Manajemen Transaksi
-- Input transaksi penjualan
-- Perhitungan total otomatis
-- Pencatatan uang masuk
-- Riwayat transaksi
-
-### 📊 Laporan & Analitik
-- Laporan transaksi:
-  - Harian
-  - Mingguan
-  - Bulanan
-- Visualisasi data menggunakan chart
-- Analisis barang terlaris
-- Rekap total pendapatan
+This application is suitable for retail stores, SMEs (UMKM), and as a learning project for Laravel-based web application development.
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## 🚀 Key Features
 
-- PHP >= 8.x
-- Laravel
-- MySQL / MariaDB
-- Blade Template Engine
-- TailwindCSS
-- Vite
-- NPM
-- Chart.js
+### 📦 Product Management
 
----
+* Add new products
+* View product list
+* Update and monitor product stock
 
-## 📂 Struktur Fitur
+### 💰 Transaction Management
 
-Aplikasi Kasir
-├── Barang
-│ ├── Tambah Barang
-│ ├── Lihat Barang
-│ └── Stok Barang
-├── Transaksi
-│ ├── Input Transaksi
-│ ├── Riwayat Transaksi
-│ └── Uang Masuk
-├── Laporan
-│ ├── Harian
-│ ├── Mingguan
-│ ├── Bulanan
-│ └── Chart
-└── Analitik
-└── Barang Terlaris
+* Sales transaction input
+* Automatic total calculation
+* Cash-in recording
+* Transaction history
 
+### 📊 Reports & Analytics
+
+* Transaction reports:
+
+  * Daily
+  * Weekly
+  * Monthly
+* Data visualization using charts
+* Best-selling product analysis
+* Total revenue recap
 
 ---
 
-## ⚙️ Persyaratan Sistem
+## 🛠️ Tech Stack
 
-- PHP >= 8.x
-- Composer
-- Node.js & NPM
-- MySQL / MariaDB
-- Git
+* PHP >= 8.x
+* Laravel
+* MySQL / MariaDB
+* Blade Template Engine
+* TailwindCSS
+* Vite
+* NPM
+* Chart.js
 
 ---
 
-````md
-## 🔧 Instalasi & Konfigurasi
+## 📂 Feature Structure
+
+```
+Cashier Application
+├── Products
+│   ├── Add Product
+│   ├── View Products
+│   └── Product Stock
+├── Transactions
+│   ├── New Transaction
+│   ├── Transaction History
+│   └── Cash In
+├── Reports
+│   ├── Daily
+│   ├── Weekly
+│   ├── Monthly
+│   └── Charts
+└── Analytics
+    └── Best-Selling Products
+```
+
+---
+
+## ⚙️ System Requirements
+
+* PHP >= 8.x
+* Composer
+* Node.js & NPM
+* MySQL / MariaDB
+* Git
+
+---
+
+## 🔧 Installation & Configuration
 
 ### 1. Clone Repository
-```bash
-git clone https://github.com/username/nama-repository.git
-cd nama-repository
-````
 
-### 2. Install Dependency Backend
+```bash
+git clone https://github.com/username/repository-name.git
+cd repository-name
+```
+
+### 2. Install Backend Dependencies
 
 ```bash
 composer install
 ```
 
-### 3. Konfigurasi Environment
+### 3. Environment Configuration
 
 ```bash
 cp .env.example .env
 ```
 
-Edit file `.env`:
+Edit the `.env` file:
 
 ```env
 DB_CONNECTION=mysql
@@ -114,34 +120,32 @@ DB_PASSWORD=
 php artisan key:generate
 ```
 
-### 5. Database Migration
+### 5. Run Database Migration
 
 ```bash
 php artisan migrate
 ```
 
-### 6. Install Dependency Frontend
+### 6. Install Frontend Dependencies
 
 ```bash
 npm install
 ```
 
-### 7. Running Vite
+### 7. Run Vite Development Server
 
 ```bash
 npm run dev
 ```
 
-### 8. Running Laravel Server
+### 8. Run Laravel Development Server
 
 ```bash
 php artisan serve
 ```
 
-Akses aplikasi melalui browser:
+Access the application via browser:
 
 ```
 http://127.0.0.1:8000
-```
-
 ```
